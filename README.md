@@ -1,2 +1,1 @@
-# assessment-node-harsh
-Node.js and MongoDb
+# Node.js and MongoDb

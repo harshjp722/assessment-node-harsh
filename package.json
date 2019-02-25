@@ -1,0 +1,45 @@
+{
+  "name": "assessment-node-harsh",
+  "version": "1.0.0",
+  "description": "Node.js and MongoDb",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshjp722/assessment-node-harsh.git"
+  },
+  "keywords": [
+    "Node.js",
+    "MongoDb",
+    "Express"
+  ],
+  "author": "Harsh Patel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harshjp722/assessment-node-harsh/issues"
+  },
+  "homepage": "https://github.com/harshjp722/assessment-node-harsh#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "crypto-js": "^3.1.6",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^5.4.11",
+    "validator": "^5.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "nodemon": "^1.18.10",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0"
+  }
+}

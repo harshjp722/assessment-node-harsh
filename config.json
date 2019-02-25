@@ -1,0 +1,6 @@
+{
+    "port": 3000,
+    "secret": "V5xDZ4hXP33nQ9ki9sU9zswbX9TMHN0TGbTq7x25fRe3iCVUz0",
+    "tokenLife": 86400,
+    "connectionString": "mongodb://localhost:27017/AssessmentApp"
+}
