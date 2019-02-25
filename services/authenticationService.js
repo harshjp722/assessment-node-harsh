@@ -1,17 +1,16 @@
 
-import { users } from '../models/user.model';
+import users from '../models/user.model';
 
 // Authenticate requests
 const authenticate = (req, res, next) => {
-  let token = req.header('x-auth');
-  console.log('Token ', token);
+  let token = req.header('Authorization').split(" ")[1];
 
-  users.findByToken(token).then(user => {
-    if (!user) {
+  users.find({ token: token, isActive: true}).then(user => {
+    if (user == null || user.length === 0) {
       return res.status(401).send('Unauthorized access');
     }
     // Add user to request
-    req.user = user;
+    req.user = user[0];
     req.token = token;
     console.log('Logged in user ', req.user);
     next();

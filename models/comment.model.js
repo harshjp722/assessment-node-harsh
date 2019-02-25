@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-
 //Mongooes custom schema for Comment Model
 //collection - commentdetails
 

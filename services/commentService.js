@@ -29,17 +29,17 @@ const addComment = (req, res) => {
 
 // Update comment service
 const editComment = (req, res) => {
-  if (req.body == null || req.query.id == null) {
+  if (req.body == null || req.params.id == null) {
     return res.status(403).send('Bad Request');
   }
 
   // Map request
-  let data = new comments({
+  let data = {
     comment: req.body.comment
-  });
+  };
 
   // Update Comment
-  comments.findByIdAndUpdate(req.query.id, data).then(doc => {
+  comments.findByIdAndUpdate(req.params.id, data).then(doc => {
     if (!doc || doc.length === 0) {
       return res.status(500).send('Internal server error');
     }
@@ -51,12 +51,12 @@ const editComment = (req, res) => {
 
 // Delete comment service
 const deleteComment = (req, res) => {
-  if (req.query.id == null) {
+  if (req.params.id == null) {
     return res.status(403).send('Bad Request');
   }
 
   // Delete Blog
-  comments.findByIdAndRemove(req.query.id).then(doc => {    
+  comments.findByIdAndRemove(req.params.id).then(doc => {
     return res.status(200).json(doc);
   }).catch(err => {
     res.status(500).json(err);
@@ -65,44 +65,64 @@ const deleteComment = (req, res) => {
 
 // Get all comments service
 const getAllComments = (req, res) => {
-  if (req.query.id == null) {
+  if (req.params.id == null) {
     return res.status(403).send('Bad Request');
   }
 
   // Get all comments
-  comments.find({ blogId: req.query.id}).then(doc => { 
-    if (!doc || doc.length === 0) {
-      return res.status(500).send('Internal server error');
-    }
+  comments.find({ blogId: req.params.id }).then(doc => {
+
     return res.status(200).json(doc);
   }).catch(err => {
     res.status(500).json(err);
   });
 }
 
-const likeDislikeComment = (req, res) => {
-  if (req.query.id == null) {
+const likeComment = (req, res) => {
+  if (req.params.id == null) {
     return res.status(403).send('Bad Request');
   }
 
-  let commentData;
-  comments.findById(req.query.id).then(doc => {
+  comments.findById(req.params.id).then(doc => {
     if (!doc || doc.length === 0) {
       return res.status(500).send('Internal server error');
     }
-    commentData = doc;
+
+    doc.totalLikeCount = doc.totalLikeCount ? (doc.totalLikeCount + 1) : 1;
+    comments.findByIdAndUpdate(req.params.id, { totalLikeCount: doc.totalLikeCount }).then(doc => {
+      if (!doc || doc.length === 0) {
+        return res.status(500).send('Internal server error');
+      }
+      return res.status(200).json(doc);
+    }).catch(err => {
+      res.status(500).json(err);
+    });
   }).catch(err => {
     return res.status(500).json(err);
   });
+}
 
-  commentData.totalLikeCount = commentData.totalLikeCount != null ? (commentData.totalLikeCount + 1) : 1;
-  comments.findByIdAndUpdate(req.query.id, commentData).then(doc => {
+const dislikeComment = (req, res) => {
+  if (req.params.id == null) {
+    return res.status(403).send('Bad Request');
+  }
+
+  comments.findById(req.params.id).then(doc => {
     if (!doc || doc.length === 0) {
       return res.status(500).send('Internal server error');
     }
-    return res.status(200).json(doc);
+
+    doc.totalLikeCount = doc.totalLikeCount ? (doc.totalLikeCount - 1) : 0;
+    comments.findByIdAndUpdate(req.params.id, { totalLikeCount: doc.totalLikeCount }).then(doc => {
+      if (!doc || doc.length === 0) {
+        return res.status(500).send('Internal server error');
+      }
+      return res.status(200).json(doc);
+    }).catch(err => {
+      res.status(500).json(err);
+    });
   }).catch(err => {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   });
 }
 
@@ -111,5 +131,6 @@ export {
   editComment,
   deleteComment,
   getAllComments,
-  likeDislikeComment
+  likeComment,
+  dislikeComment
 }

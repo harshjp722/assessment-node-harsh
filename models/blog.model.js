@@ -10,7 +10,7 @@ let BlogSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
-    minlength: 150
+    minlength: 10 // This can be set to higher limit after testing
   },
   author: {
     userId: {

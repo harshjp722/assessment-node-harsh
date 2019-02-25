@@ -1,10 +1,10 @@
 import express from 'express';
-import blogService from '../services/blogService';
-import authenticate from '../services/authenticationService';
+import * as blogService from '../services/blogService';
+import * as authenticateService from '../services/authenticationService';
 
 let router = express.Router();
 
-// router.use(authenticate);
+router.use(authenticateService.authenticate);
 
 // Post new blog
 router.post('/addBlog', (req, res) => {

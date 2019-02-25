@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-import jwt from 'jsonwebtoken';
-import config from '../config';
 
 // User Table schema
 let UserSchema = new mongoose.Schema({
@@ -36,7 +34,7 @@ let UserSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     required: true,
-    default: false
+    default: true
   },
   createdDate: {
     type: Date,
