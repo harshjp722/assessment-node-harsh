@@ -1,6 +1,6 @@
 # Node.js and MongoDb
 
-This is a sample Blog Node.js and MongoDb app. It has basic implementation of Sigin and Signup using JWT token. Users can create blog and comment on it. The comments on blog can be liked and disliked. 
+This is a sample Blog api's using Node.js and MongoDb. It has basic implementation of Sigin and Signup using JWT token. Users can create blog and comment on it. The comments on blog can be liked and disliked. 
 
 Please import postman collection of API's from here - https://www.getpostman.com/collections/5658cddc73fc1ed46258
 
