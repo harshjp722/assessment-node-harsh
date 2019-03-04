@@ -50,7 +50,7 @@ const userLogin = (req, res) => {
       userId: doc[0]._id,
       email: doc[0].email
     }, config.secret, {
-        expiresIn: "1h"
+        expiresIn: config.tokenLife.toString()
       }).toString();
 
     // Add token to user collection
